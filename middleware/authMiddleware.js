@@ -1,7 +1,7 @@
-const jwt = require("jsonwebtoken");
-const UserModel = require("../models/user.model");
+import UserModel from "../models/userModel";
+import  jwt  from "jsonwebtoken";
 
-module.exports.checkUser = (req, res, next) => {
+export const checkUser = (req, res, next) => {
   const token = req.cookies.jwt;
   if (token) {
     jwt.verify(token, process.env.TOKEN_SECRET, async (err, decodedToken) => {
@@ -21,7 +21,7 @@ module.exports.checkUser = (req, res, next) => {
   }
 };
 
-module.exports.requireAuth = (req, res, next) => {
+export const requireAuth = (req, res, next) => {
   const token = req.cookies.jwt;
   if (token) {
     jwt.verify(token, process.env.TOKEN_SECRET, async (err, decodedToken) => {

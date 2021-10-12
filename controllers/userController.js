@@ -1,12 +1,43 @@
-const UserModel = require("../models/user.model");
-const ObjectID = require("mongoose").Types.ObjectId;
+import UserModel from "../models/userModel.js";
 
-module.exports.getAllUsers = async (req, res) => {
-  const users = await UserModel.find().select("-password");
+// const UserModel = require("../models/userModel");
+import mongoose from "mongoose"
+const ObjectID = mongoose.Types.ObjectId;
+
+/**
+ * *@Route('api/users/')
+ * !GET
+ */
+ export const getAllUsers = async (req, res) => {
+  const users = await UserRepository.findAll("-password -createdAt -updatedAt");
   res.status(200).json(users);
 };
 
-module.exports.userInfo = (req, res) => {
+/**
+ * *@Route('api/users/')
+ * !GET
+ */
+export const getUsers = async (req, res) => {
+  const users = await UserRepository.findAll("-password -createdAt -updatedAt");
+  res.status(200).json(users);
+};
+
+/**
+ * *@Route('api/users/{id}')
+ * !GET
+ */
+ export const getUser = async (req, res) => {
+  updateUser;
+  const user = await UserRepository.find(
+    req,
+    res,
+    "-password -createdAt -updatedAt"
+  );
+
+  return user;
+};
+
+export const userInfo = (req, res) => {
   if (!ObjectID.isValid(req.params.id))
     return res.status(400).send("ID unknown : " + req.params.id);
 
@@ -16,7 +47,9 @@ module.exports.userInfo = (req, res) => {
   }).select("-password");
 };
 
-module.exports.updateUser = async (req, res) => {
+
+
+export const updateUser = async (req, res) => {
   if (!ObjectID.isValid(req.params.id))
     return res.status(400).send("ID unknown : " + req.params.id);
 
@@ -39,7 +72,7 @@ module.exports.updateUser = async (req, res) => {
   }
 };
 
-module.exports.deleteUser = async (req, res) => {
+export const deleteUser = async (req, res) => {
   if (!ObjectID.isValid(req.params.id))
     return res.status(400).send("ID unknown : " + req.params.id);
 
@@ -51,7 +84,7 @@ module.exports.deleteUser = async (req, res) => {
   }
 };
 
-module.exports.follow = async (req, res) => {
+export const follow = async (req, res) => {
   if (
     !ObjectID.isValid(req.params.id) ||
     !ObjectID.isValid(req.body.idToFollow)
@@ -84,7 +117,7 @@ module.exports.follow = async (req, res) => {
   }
 };
 
-module.exports.unfollow = async (req, res) => {
+export const unfollow = async (req, res) => {
   if (
     !ObjectID.isValid(req.params.id) ||
     !ObjectID.isValid(req.body.idToUnfollow)

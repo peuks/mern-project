@@ -1,6 +1,6 @@
-const mongoose = require('mongoose');
-const { isEmail } = require('validator');
-const bcrypt = require('bcrypt');
+import  isEmail from "validator"
+import bcrypt from "bcrypt"
+import mongoose from 'mongoose';
 
 const userSchema = new mongoose.Schema(
   {
@@ -15,7 +15,7 @@ const userSchema = new mongoose.Schema(
     email: {
       type: String,
       required: true,
-      validate: [isEmail],
+      // validate: [isEmail],
       lowercase: true,
       unique: true,
       trim: true,
@@ -70,4 +70,5 @@ userSchema.statics.login = async function(email, password) {
 
 const UserModel = mongoose.model("user", userSchema);
 
-module.exports = UserModel;
+export default  UserModel;
+

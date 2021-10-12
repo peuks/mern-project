@@ -1,10 +1,24 @@
-const UserModel = require("../models/user.model");
-const fs = require("fs");
-const { promisify } = require("util");
-const pipeline = promisify(require("stream").pipeline);
-const { uploadErrors } = require("../utils/errors.utils");
+import UserModel from "../models/userModel.js"
+// import uploadErrors from "../utils/errorsUtils.js"
+import fs from "fs"
+import { promisify } from "util";
 
-module.exports.uploadProfil = async (req, res) => {
+import stream from "stream";
+const pipeline = promisify(stream.pipeline);
+
+const uploadErrors = (err) => {
+  let errors = { format: '', maxSize: ""};
+
+  if (err.message.includes('invalid file'))
+    errors.format = "Format incompatabile";
+
+  if (err.message.includes('max size'))
+    errors.maxSize = "Le fichier dépasse 500ko";
+
+  return errors
+}
+
+const uploadProfil = async (req, res) => {
   try {
     if (
       req.file.detectedMimeType != "image/jpg" &&
@@ -41,3 +55,5 @@ module.exports.uploadProfil = async (req, res) => {
     return res.status(500).send({ message: err });
   }
 };
+
+export default uploadProfil
