@@ -5,6 +5,7 @@ import connectDB from "./config/db.js";
 // import userRoutes from "./Routes/userRoutes.js";
 
 import userRoutes from "./routes/userRoutes.js"
+import postRoutes from "./routes/postRoutes.js"
 /**
  * .env file configuration
  */
@@ -25,6 +26,8 @@ app.use(express.json());
  * Routes
  */
 app.use("/api/users", userRoutes);
+
+app.use('/api/post', postRoutes);
 
 /**
  * Server

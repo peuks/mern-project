@@ -13,7 +13,7 @@
    userInfo,
  } from "../controllers/userController.js";
  
- import uploadProfil from "../controllers/uploadController.js";
+ import {uploadProfil} from "../controllers/uploadController.js";
  
  const router = express.Router();
  

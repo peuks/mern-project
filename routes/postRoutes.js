@@ -1,4 +1,14 @@
-import postController from "../controllers/postController";
+import {
+    readPost,
+    createPost,
+    updatePost,
+    deletePost,
+    likePost,
+    unlikePost,
+    commentPost,
+    editCommentPost,
+    deleteCommentPost
+} from "../controllers/postController.js";
 import multer from "multer";
 const upload = multer();
 
@@ -6,16 +16,16 @@ import express from 'express';
 const router = express.Router();
 
 
-router.get('/', postController.readPost);
-router.post('/', upload.single("file"), postController.createPost);
-router.put('/:id', postController.updatePost);
-router.delete('/:id', postController.deletePost);
-router.patch('/like-post/:id', postController.likePost);
-router.patch('/unlike-post/:id', postController.unlikePost);
+router.get('/', readPost);
+router.post('/', upload.single("file"), createPost);
+router.put('/:id', updatePost);
+router.delete('/:id', deletePost);
+router.patch('/like-post/:id', likePost);
+router.patch('/unlike-post/:id', unlikePost);
 
 // comments
-router.patch('/comment-post/:id', postController.commentPost);
-router.patch('/edit-comment-post/:id', postController.editCommentPost);
-router.patch('/delete-comment-post/:id', postController.deleteCommentPost);
+router.patch('/comment-post/:id', commentPost);
+router.patch('/edit-comment-post/:id', editCommentPost);
+router.patch('/delete-comment-post/:id', deleteCommentPost);
 
 export  default  router;

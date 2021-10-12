@@ -22,7 +22,7 @@ const uploadProfil = async (req, res) => {
   try {
     if (
       req.file.detectedMimeType != "image/jpg" &&
-      req.file.detectedMimeType != "image/png" &&
+      req.file.detectedMimeTypep != "image/png" &&
       req.file.detectedMimeType != "image/jpeg"
     )
       throw Error("invalid file");
@@ -56,4 +56,4 @@ const uploadProfil = async (req, res) => {
   }
 };
 
-export default uploadProfil
+export  {uploadProfil}
