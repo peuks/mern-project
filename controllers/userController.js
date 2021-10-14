@@ -17,6 +17,18 @@ const ObjectID = mongoose.Types.ObjectId;
  * *@Route('api/users/')
  * !GET
  */
+ export const uploadFiles = async (req, res) => {
+  res.status(200).json(
+    {
+      "message":"Tuto Bene 💩 "
+    }
+    );
+};
+
+/**
+ * *@Route('api/users/')
+ * !GET
+ */
 export const getUsers = async (req, res) => {
   const users = await UserRepository.findAll("-password -createdAt -updatedAt");
   res.status(200).json(users);

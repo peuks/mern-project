@@ -1,22 +1,22 @@
-import UserModel from "../models/userModel.js"
+import UserModel from "../models/userModel.js";
 // import uploadErrors from "../utils/errorsUtils.js"
-import fs from "fs"
+import fs from "fs";
 import { promisify } from "util";
 
 import stream from "stream";
 const pipeline = promisify(stream.pipeline);
 
 const uploadErrors = (err) => {
-  let errors = { format: '', maxSize: ""};
+  let errors = { format: "", maxSize: "" };
 
-  if (err.message.includes('invalid file'))
+  if (err.message.includes("invalid file"))
     errors.format = "Format incompatabile";
 
-  if (err.message.includes('max size'))
+  if (err.message.includes("max size"))
     errors.maxSize = "Le fichier dépasse 500ko";
 
-  return errors
-}
+  return errors;
+};
 
 const uploadProfil = async (req, res) => {
   try {
@@ -44,8 +44,8 @@ const uploadProfil = async (req, res) => {
   try {
     await UserModel.findByIdAndUpdate(
       req.body.userId,
-      { $set : {picture: "./uploads/profil/" + fileName}},
-      { new: true, upsert: true, setDefaultsOnInsert: true},
+      { $set: { picture: "./uploads/profil/" + fileName } },
+      { new: true, upsert: true, setDefaultsOnInsert: true },
       (err, docs) => {
         if (!err) return res.send(docs);
         else return res.status(500).send({ message: err });
@@ -56,4 +56,4 @@ const uploadProfil = async (req, res) => {
   }
 };
 
-export  {uploadProfil}
+export { uploadProfil };

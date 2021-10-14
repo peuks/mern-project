@@ -2,10 +2,12 @@ import express from "express";
 import cors from "cors";
 import dotenv from "dotenv";
 import connectDB from "./config/db.js";
+
 // import userRoutes from "./Routes/userRoutes.js";
 
-import userRoutes from "./routes/userRoutes.js"
-import postRoutes from "./routes/postRoutes.js"
+import userRoutes from "./routes/userRoutes.js";
+import postRoutes from "./routes/postRoutes.js";
+
 /**
  * .env file configuration
  */
@@ -27,7 +29,7 @@ app.use(express.json());
  */
 app.use("/api/users", userRoutes);
 
-app.use('/api/post', postRoutes);
+app.use("/api/post", postRoutes);
 
 /**
  * Server
