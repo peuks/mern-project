@@ -1,22 +1,9 @@
 import mongoose from "mongoose";
 
 const connectDB = () => {
-  mongoose
-    .connect(
-      // "mongodb+srv://" + process.env.DB_USER_PASS + "@cluster0.iuzir.mongodb.net/mern-project",
-      "mongodb+srv://" +
-        process.env.DB_USER +
-        ":" +
-        process.env.DB_USER_PASS +
-        "@fiaspora.fyg7j.mongodb.net/test?authSource=admin&replicaSet=atlas-o4cjvi-shard-0&readPreference=primary&appname=MongoDB%20Compass&ssl=true",
 
-      {
-        useNewUrlParser: true,
-        useUnifiedTopology: true,
-        useCreateIndex: true,
-        useFindAndModify: false,
-      }
-    )
+  mongoose.connect(`mongodb://${process.env.MONGO_INITDB_ROOT_USERNAME}:${process.env.MONGO_INITDB_ROOT_PASSWORD}@${process.env.DB_HOST}/${process.env.MONGO_INITDB_DATABASE}?readPreference=primary&appname=MongoDB%20Compass%20Community&ssl=false`,
+    { useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true })
     .then(() => console.log("Connected to MongoDB"))
     .catch((err) => console.log("Failed to connect to MongoDB", err));
 };
